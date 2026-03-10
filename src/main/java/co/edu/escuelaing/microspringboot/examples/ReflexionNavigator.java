@@ -10,7 +10,7 @@ import static java.lang.System.out;
 public class ReflexionNavigator {
 
     public static void main(String[] args) {
-        Class c = "hello".getClass();
+        Class<?> c = "hello".getClass();
 
         printMembers(c.getDeclaredMethods(), "Method");
 
@@ -19,12 +19,12 @@ public class ReflexionNavigator {
     private static void printMembers(Member[] mbrs, String s) {
         out.format("%s:%n", s);
         for (Member mbr : mbrs) {
-            if (mbr instanceof Field)
-                out.format("  %s%n", ((Field) mbr).toGenericString());
-            else if (mbr instanceof Constructor)
-                out.format("  %s%n", ((Constructor) mbr).toGenericString());
-            else if (mbr instanceof Method)
-                out.format("  %s%n", ((Method) mbr).toGenericString());
+            if (mbr instanceof Field field)
+                out.format("  %s%n", field.toGenericString());
+            else if (mbr instanceof Constructor<?> constructor)
+                out.format("  %s%n", constructor.toGenericString());
+            else if (mbr instanceof Method method)
+                out.format("  %s%n", method.toGenericString());
         }
         if (mbrs.length == 0)
             out.format("  -- No %s --%n", s);
